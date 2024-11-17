@@ -1,12 +1,13 @@
 package controllers
 
 import (
+	"time"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/ilham2000r/vue-go-taskmanagment/config"
 	"github.com/ilham2000r/vue-go-taskmanagment/models"
 	"golang.org/x/crypto/bcrypt"
-	"time"
 )
 
 type AuthController struct{}
@@ -14,6 +15,7 @@ type AuthController struct{}
 func (ac *AuthController) CreateUser(c *fiber.Ctx) error {
 	user := new(models.User)
 	if err := c.BodyParser(user); err != nil {
+		// log เพิ่มไว้เลย จะได้ดูง่าย ทุกที่เลยที่ดัก error
 		return c.Status(400).JSON(fiber.Map{"error": "Invalid input"})
 	}
 

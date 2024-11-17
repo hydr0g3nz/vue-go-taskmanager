@@ -1,11 +1,12 @@
 package main
 
 import (
+	"log"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/ilham2000r/vue-go-taskmanagment/config"
 	"github.com/ilham2000r/vue-go-taskmanagment/routes"
-	"log"
 )
 
 func main() {
@@ -22,5 +23,5 @@ func main() {
 	routes.SetupRoutes(app)
 
 	// Start server
-	log.Fatal(app.Listen("localhost:8000"))
+	log.Fatal(app.Listen("localhost:8000")) //ใช้ config
 }

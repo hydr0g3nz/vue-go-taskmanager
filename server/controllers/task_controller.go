@@ -44,7 +44,8 @@ func (tc *TaskController) CreateTask(c *fiber.Ctx) error {
 
 	}
 	// check priority
-	if req.Priority != "A" && req.Priority != "B" && req.Priority != "C" && req.Priority != "D" {
+	validPriorities := map[string]bool{"A": true, "B": true, "C": true, "D": true}
+	if !validPriorities[req.Priority] {
 		return c.Status(400).JSON(fiber.Map{
 			"error": "Invalid priority. Must be A, B, C, or D",
 		})
@@ -72,6 +73,7 @@ func (tc *TaskController) UpdateTask(c *fiber.Ctx) error {
 	userId := c.Locals("user_id").(uint)
 
 	var task models.Task
+	//ใช้ take แทน first ดีกว่า
 	if err := config.DB.Where("id = ? AND user_id = ?", taskId, userId).First(&task).Error; err != nil {
 		return c.Status(404).JSON(fiber.Map{"error": "Task not found"})
 	}
@@ -89,6 +91,7 @@ func (tc *TaskController) UpdateStatus(c *fiber.Ctx) error {
 	userId := c.Locals("user_id").(uint)
 
 	var task models.Task
+	//ใช้ take แทน first ดีกว่า
 	if err := config.DB.Where("id = ? AND user_id = ?", taskId, userId).First(&task).Error; err != nil {
 		return c.Status(404).JSON(fiber.Map{"error": "Task not found"})
 	}
@@ -111,6 +114,7 @@ func (tc *TaskController) DeleteTask(c *fiber.Ctx) error {
 	userId := c.Locals("user_id").(uint)
 
 	var task models.Task
+	//ใช้ take แทน first ดีกว่า
 	if err := config.DB.Where("id = ? AND user_id = ?", taskId, userId).First(&task).Error; err != nil {
 		return c.Status(404).JSON(fiber.Map{"error": "Task not found"})
 	}
@@ -138,6 +142,7 @@ func (tc *TaskController) GetTaskById(c *fiber.Ctx) error {
 	userId := c.Locals("user_id").(uint)
 
 	var task models.Task
+	//ใช้ take แทน first ดีกว่า
 	result := config.DB.Where("id = ? AND user_id = ?", taskId, userId).First(&task)
 
 	if result.Error != nil {

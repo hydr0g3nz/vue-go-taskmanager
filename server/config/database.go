@@ -2,13 +2,14 @@ package config
 
 import (
 	"fmt"
+	"log"
+	"os"
+	"time"
+
 	"github.com/ilham2000r/vue-go-taskmanagment/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"log"
-	"os"
-	"time"
 )
 
 const (
@@ -17,7 +18,7 @@ const (
 	username = "user"
 	password = "password123456"
 	dbname   = "taskManagement"
-)
+) //เรียกผ่าน config ให้หมด
 
 var DB *gorm.DB
 

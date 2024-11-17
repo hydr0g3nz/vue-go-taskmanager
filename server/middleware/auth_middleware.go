@@ -2,14 +2,15 @@ package middleware
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
-	"strings"
 )
 
 func AuthMiddleware() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		jwtSecretKey := "SecretKey"
+		jwtSecretKey := "SecretKey" //config
 		authHeader := c.Get("Authorization")
 		// check header (Bearer)
 		if authHeader == "" {
